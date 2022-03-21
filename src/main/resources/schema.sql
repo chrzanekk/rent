@@ -1,6 +1,7 @@
 CREATE TABLE landlords(
 	id INT AUTO_INCREMENT,
-	NAME VARCHAR(60) NOT NULL,
+	first_name VARCHAR(15) NOT NULL,
+	second_name VARCHAR(50) NOT NULL,
 	create_date datetime default now(),
 	modify_date datetime,
 	remove_date datetime,
@@ -9,7 +10,8 @@ CREATE TABLE landlords(
 
 CREATE TABLE tenants(
 	id INT AUTO_INCREMENT,
-	NAME VARCHAR(60) NOT NULL,
+	first_name VARCHAR(15) NOT NULL,
+	second_name VARCHAR(50) NOT NULL,
 	create_date datetime default now(),
 	modify_date datetime,
 	remove_date datetime,
@@ -21,7 +23,7 @@ CREATE TABLE rent_objects (
 	id INT AUTO_INCREMENT,
 	NAME VARCHAR(100) NOT NULL,
 	unit_price DECIMAL(10,2) NOT NULL,
-	AREA INT NOT NULL,
+	AREA FLOAT(10) NOT NULL,
 	description VARCHAR(1000),
 	landlord_id INT NOT NULL,
 	create_date DATETIME default now(),
@@ -42,7 +44,6 @@ CREATE TABLE reservations(
 	modify_date DATETIME,
 	remove_date DATETIME,
 	PRIMARY KEY (id),
-	FOREIGN KEY (landlord_id) REFERENCES landlords(id),
 	FOREIGN KEY (tenant_id) REFERENCES tenants(id),
 	FOREIGN KEY (rent_object_id) REFERENCES rent_objects(id)
 );
