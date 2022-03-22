@@ -7,27 +7,21 @@ public class ReservationGetResponse {
     private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
-    private String tenantFirstName;
-    private String tenantLastName;
-    private String landlordFirstName;
-    private String landlordLastName;
+    private String tenantName;
+    private String landlordName;
     private BigDecimal rentalCost;
 
     public ReservationGetResponse(Long id,
                                   LocalDate startDate,
                                   LocalDate endDate,
-                                  String tenantFirstName,
-                                  String tenantLastName,
-                                  String landlordFirstName,
-                                  String landlordLastName,
+                                  String tenantName,
+                                  String landlordName,
                                   BigDecimal rentalCost) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.tenantFirstName = tenantFirstName;
-        this.tenantLastName = tenantLastName;
-        this.landlordFirstName = landlordFirstName;
-        this.landlordLastName = landlordLastName;
+        this.tenantName = tenantName;
+        this.landlordName = landlordName;
         this.rentalCost = rentalCost;
     }
 
@@ -43,20 +37,12 @@ public class ReservationGetResponse {
         return endDate;
     }
 
-    public String getTenantFirstName() {
-        return tenantFirstName;
+    public String getTenantName() {
+        return tenantName;
     }
 
-    public String getTenantLastName() {
-        return tenantLastName;
-    }
-
-    public String getLandlordFirstName() {
-        return landlordFirstName;
-    }
-
-    public String getLandlordLastName() {
-        return landlordLastName;
+    public String getLandlordName() {
+        return landlordName;
     }
 
     public BigDecimal getRentalCost() {

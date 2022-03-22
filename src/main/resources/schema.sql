@@ -1,7 +1,6 @@
 CREATE TABLE landlords(
 	id INT AUTO_INCREMENT,
-	first_name VARCHAR(15) NOT NULL,
-	second_name VARCHAR(50) NOT NULL,
+	name VARCHAR(100) NOT NULL,
 	create_date datetime default now(),
 	modify_date datetime,
 	remove_date datetime,
@@ -10,8 +9,7 @@ CREATE TABLE landlords(
 
 CREATE TABLE tenants(
 	id INT AUTO_INCREMENT,
-	first_name VARCHAR(15) NOT NULL,
-	second_name VARCHAR(50) NOT NULL,
+	name VARCHAR(100) NOT NULL,
 	create_date datetime default now(),
 	modify_date datetime,
 	remove_date datetime,

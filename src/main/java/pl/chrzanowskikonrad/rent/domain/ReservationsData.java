@@ -11,12 +11,10 @@ public class ReservationsData {
         private Long rentObjectId;
         private BigDecimal rentalCost;
 
-        private String tenantFirstName;
-        private String tenantLastName;
+        private String tenantName;
 
         private Long landlordId;
-        private String landlordFirstName;
-        private String landlordLastName;
+        private String landlordName;
 
         private String rentObjectName;
         private BigDecimal unitPrice;
@@ -26,7 +24,49 @@ public class ReservationsData {
     public ReservationsData() {
     }
 
+    public ReservationsData(Long id,
+                            LocalDate startDate,
+                            LocalDate endDate,
+                            BigDecimal rentalCost,
+                            String tenantName,
+                            String landlordName,
+                            String rentObjectName) {
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.rentalCost = rentalCost;
+        this.tenantName = tenantName;
+        this.landlordName = landlordName;
+        this.rentObjectName = rentObjectName;
+    }
 
+    public ReservationsData(Long id,
+                            LocalDate startDate,
+                            LocalDate endDate,
+                            Long tenantId,
+                            Long rentObjectId,
+                            BigDecimal rentalCost,
+                            String tenantName,
+                            Long landlordId,
+                            String landlordName,
+                            String rentObjectName,
+                            BigDecimal unitPrice,
+                            Float area,
+                            String description) {
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tenantId = tenantId;
+        this.rentObjectId = rentObjectId;
+        this.rentalCost = rentalCost;
+        this.tenantName = tenantName;
+        this.landlordId = landlordId;
+        this.landlordName = landlordName;
+        this.rentObjectName = rentObjectName;
+        this.unitPrice = unitPrice;
+        this.area = area;
+        this.description = description;
+    }
 
     public Long getId() {
         return id;
@@ -52,24 +92,8 @@ public class ReservationsData {
         return rentalCost;
     }
 
-    public String getTenantFirstName() {
-        return tenantFirstName;
-    }
-
-    public String getTenantLastName() {
-        return tenantLastName;
-    }
-
     public Long getLandlordId() {
         return landlordId;
-    }
-
-    public String getLandlordFirstName() {
-        return landlordFirstName;
-    }
-
-    public String getLandlordLastName() {
-        return landlordLastName;
     }
 
     public String getRentObjectName() {
@@ -86,5 +110,13 @@ public class ReservationsData {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getTenantName() {
+        return tenantName;
+    }
+
+    public String getLandlordName() {
+        return landlordName;
     }
 }
