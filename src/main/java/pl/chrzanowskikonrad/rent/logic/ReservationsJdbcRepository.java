@@ -2,8 +2,8 @@ package pl.chrzanowskikonrad.rent.logic;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import pl.chrzanowskikonrad.rent.domain.ReservationsData;
 import pl.chrzanowskikonrad.rent.domain.ReservationsFilter;
-import pl.chrzanowskikonrad.rent.logic.CommonJdbcRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +17,46 @@ public class ReservationsJdbcRepository {
     public ReservationsJdbcRepository(JdbcTemplate jdbcTemplate, CommonJdbcRepository commonJdbcRepository) {
         this.jdbcTemplate = jdbcTemplate;
         this.commonJdbcRepository = commonJdbcRepository;
+    }
+
+    public Long create(ReservationsData data) {
+        String query = "INSERT INTO reservations (" +
+                "rental_start," +
+                "rental_end," +
+                "tenant_id," +
+                "rent_object_id," +
+                "rental_cost) VALUES  (" +
+                "?," +
+                "?," +
+                "?," +
+                "?," +
+                "?)";
+        jdbcTemplate.update(query,
+                data.getStartDate(),
+                data.getEndDate(),
+                data.getTenantId(),
+                data.getRentObjectId(),
+                data.getRentalCost());
+        return commonJdbcRepository.getLastInsertedId();
+    }
+
+    public void update(ReservationsData data) {
+        String query = "UPDATE reservations SET " +
+                "rental_start = ?," +
+                "rental_end = ?," +
+                "tenant_id = ?," +
+                "rent_object_id = ?," +
+                "rental_cost = ?," +
+                "modify_date = ? WHERE " +
+                "id = ?";
+        jdbcTemplate.update(query,
+                data.getStartDate(),
+                data.getEndDate(),
+                data.getTenantId(),
+                data.getRentObjectId(),
+                data.getRentalCost(),
+                data.getModifyDate(),
+                data.getId());
     }
 
     public List<Map<String, Object>> findReservationsByLandlordName(ReservationsFilter filter) {

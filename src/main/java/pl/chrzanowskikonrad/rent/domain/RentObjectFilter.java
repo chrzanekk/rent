@@ -16,6 +16,14 @@ public class RentObjectFilter {
     public RentObjectFilter() {
     }
 
+    public RentObjectFilter(String name) {
+        this.name = name;
+    }
+
+    public RentObjectFilter(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

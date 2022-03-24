@@ -9,6 +9,10 @@ public class LandlordFilter {
         this.name = name;
     }
 
+    public LandlordFilter(String name) {
+        this.name = name;
+    }
+
     public LandlordFilter() {
     }
 

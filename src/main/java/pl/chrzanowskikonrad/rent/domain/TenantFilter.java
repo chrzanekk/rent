@@ -12,6 +12,10 @@ public class TenantFilter {
     public TenantFilter() {
     }
 
+    public TenantFilter(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

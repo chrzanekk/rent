@@ -96,5 +96,5 @@ INSERT INTO reservations (rental_start, rental_end, tenant_id, rent_object_id, r
 				'2022-05-01',
 				(SELECT id FROM tenants WHERE name = 'Jakub Zastawski'),
 				(SELECT id FROM rent_objects WHERE NAME = 'Obiekt nr 5'),
-				 36855.00
+				 12285.00
 	);

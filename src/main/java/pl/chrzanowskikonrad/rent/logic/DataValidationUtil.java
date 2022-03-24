@@ -1,6 +1,8 @@
 package pl.chrzanowskikonrad.rent.logic;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class DataValidationUtil {
 
@@ -36,6 +38,15 @@ public class DataValidationUtil {
         }
     }
 
+    public static void validateDate(LocalDate dateTime, String fieldName){
+        if (dateTime == null){
+            throw new IllegalArgumentException(prepareMessageForEmpty(fieldName));
+        }
+        if(dateTime.isBefore(LocalDate.now())){
+            throw new IllegalArgumentException(prepareMessageForDateBeforeActualDate(dateTime));
+        }
+    }
+
     public static boolean isUnitPricePositive(BigDecimal unitPrice) {
         return unitPrice.compareTo(BigDecimal.ZERO) > 0;
     }
@@ -60,5 +71,9 @@ public class DataValidationUtil {
 
     private static String prepareMessageForToShortDesctiption(String fieldName) {
         return "Pole \" " + fieldName + " \" musi mieć minimum 5 znaków.";
+    }
+
+    private static String prepareMessageForDateBeforeActualDate(LocalDate localDate) {
+        return "Data " + localDate + " nie może być wcześniejsza niż " + LocalDate.now();
     }
 }

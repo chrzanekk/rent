@@ -36,26 +36,42 @@ public class RentEndpoint {
 
     @PostMapping(path = "/reservation", consumes = "application/json")
     public NewReservationGetResponse createReservation(@RequestBody NewReservationPostRequest request) {
-        Long newReservationId = null;
-        return null;
+        Long newReservationId = reservationsService.create(new ReservationsData(
+                request.getRentStart(),
+                request.getRentEnd(),
+                request.getTenantName(),
+                request.getLandlordName(),
+                request.getRentObjectName()
+        ));
+        return new NewReservationGetResponse(newReservationId);
     }
 
+    @PutMapping(path = "/reservation/{id}", consumes = "application/json")
+    public void updateReservation(@PathVariable Long id, @RequestBody ReservationPutRequest request) {
+        reservationsService.update(new ReservationsData(
+                request.getId(),
+                request.getRentStartDate(),
+                request.getRentEndDate(),
+                request.getTenantId(),
+                request.getRentObjectId()
+        ));
+    }
 
 
 //    mappings for tests only
 
     @GetMapping(path = "/landlords", produces = "application/json; charset=UTF-8")
-    public List<LandlordData> getLandlords(){
+    public List<LandlordData> getLandlords() {
         return landlordsService.find(new LandlordFilter());
     }
 
     @GetMapping(path = "/tenants", produces = "application/json; charset=UTF-8")
-    public List<TenantData> getTenants(){
+    public List<TenantData> getTenants() {
         return tenantsService.find(new TenantFilter());
     }
 
     @GetMapping(path = "/rent-objects", produces = "application/json; charset=UTF-8")
-    public List<RentObjectData> getRentObjects(){
+    public List<RentObjectData> getRentObjects() {
         return rentObjectService.find(new RentObjectFilter());
     }
 
