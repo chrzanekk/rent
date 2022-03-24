@@ -1,4 +1,4 @@
-package pl.chrzanowskikonrad.rent.repository;
+package pl.chrzanowskikonrad.rent.logic;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -51,14 +51,12 @@ public class ReservationsJdbcRepository {
 
     private String prepareFilterQuery(ReservationsFilter filter, String query) {
         if (filter != null) {
-            if (filter.getLandlordName() != null && filter.getRentObjectId() != null) {
-                query += " WHERE landlords.name = '" + filter.getLandlordName() + "' AND rent_objects.id = '" + filter.getRentObjectId() + "'";
-            }
+            query += " WHERE 1=1 ";
             if (filter.getLandlordName() != null) {
-                query += " WHERE landlords.name = '" + filter.getLandlordName() + "'";
+                query += " AND landlords.name = '" + filter.getLandlordName() + "'";
             }
             if (filter.getRentObjectId() != null) {
-                query += " WHERE rent_objects.id = '" + filter.getRentObjectId() + "'";
+                query += " AND rent_objects.id = '" + filter.getRentObjectId() + "'";
             }
         }
         return query;

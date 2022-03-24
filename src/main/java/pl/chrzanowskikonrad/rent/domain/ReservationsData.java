@@ -21,9 +21,6 @@ public class ReservationsData {
         private Float area;
         private String description;
 
-    public ReservationsData() {
-    }
-
     public ReservationsData(Long id,
                             LocalDate startDate,
                             LocalDate endDate,

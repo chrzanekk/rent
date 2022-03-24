@@ -3,7 +3,6 @@ package pl.chrzanowskikonrad.rent.logic;
 import org.springframework.stereotype.Service;
 import pl.chrzanowskikonrad.rent.domain.ReservationsData;
 import pl.chrzanowskikonrad.rent.domain.ReservationsFilter;
-import pl.chrzanowskikonrad.rent.repository.ReservationsJdbcRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +18,9 @@ public class ReservationsService {
     public ReservationsService(ReservationsJdbcRepository repository) {
         this.repository = repository;
     }
+
+
+
 
     public List<ReservationsData> find(ReservationsFilter filter) {
         return getReservations(repository.findReservationsByLandlordName(filter));

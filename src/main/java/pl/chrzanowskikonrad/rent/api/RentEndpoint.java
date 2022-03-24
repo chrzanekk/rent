@@ -1,12 +1,11 @@
 package pl.chrzanowskikonrad.rent.api;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import pl.chrzanowskikonrad.rent.domain.ReservationsData;
-import pl.chrzanowskikonrad.rent.domain.ReservationsFilter;
+import org.springframework.web.bind.annotation.*;
+import pl.chrzanowskikonrad.rent.domain.*;
+import pl.chrzanowskikonrad.rent.logic.LandlordsService;
+import pl.chrzanowskikonrad.rent.logic.RentObjectService;
 import pl.chrzanowskikonrad.rent.logic.ReservationsService;
+import pl.chrzanowskikonrad.rent.logic.TenantsService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +15,15 @@ import java.util.List;
 public class RentEndpoint {
 
     private ReservationsService reservationsService;
+    private LandlordsService landlordsService;
+    private TenantsService tenantsService;
+    private RentObjectService rentObjectService;
 
-    public RentEndpoint(ReservationsService reservationsService) {
+    public RentEndpoint(ReservationsService reservationsService, LandlordsService landlordsService, TenantsService tenantsService, RentObjectService rentObjectService) {
         this.reservationsService = reservationsService;
+        this.landlordsService = landlordsService;
+        this.tenantsService = tenantsService;
+        this.rentObjectService = rentObjectService;
     }
 
     @GetMapping(path = "/reservations", produces = "application/json; charset=UTF-8")
@@ -27,6 +32,31 @@ public class RentEndpoint {
             @RequestParam(name = "objectId", required = false) Long objectId) {
         List<ReservationsData> reservations = reservationsService.find(new ReservationsFilter(landlordName, objectId));
         return new ReservationsRequestGetResponse(reservationsToResponse(reservations));
+    }
+
+    @PostMapping(path = "/reservation", consumes = "application/json")
+    public NewReservationGetResponse createReservation(@RequestBody NewReservationPostRequest request) {
+        Long newReservationId = null;
+        return null;
+    }
+
+
+
+//    mappings for tests only
+
+    @GetMapping(path = "/landlords", produces = "application/json; charset=UTF-8")
+    public List<LandlordData> getLandlords(){
+        return landlordsService.find(new LandlordFilter());
+    }
+
+    @GetMapping(path = "/tenants", produces = "application/json; charset=UTF-8")
+    public List<TenantData> getTenants(){
+        return tenantsService.find(new TenantFilter());
+    }
+
+    @GetMapping(path = "/rent-objects", produces = "application/json; charset=UTF-8")
+    public List<RentObjectData> getRentObjects(){
+        return rentObjectService.find(new RentObjectFilter());
     }
 
 

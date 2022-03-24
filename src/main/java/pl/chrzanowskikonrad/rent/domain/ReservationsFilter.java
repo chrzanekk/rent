@@ -6,6 +6,9 @@ public class ReservationsFilter {
 
     private Long rentObjectId;
 
+    public ReservationsFilter() {
+    }
+
     public ReservationsFilter(String landlordName) {
         this.landlordName = landlordName;
     }
