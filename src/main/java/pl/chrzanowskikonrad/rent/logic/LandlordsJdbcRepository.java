@@ -33,7 +33,7 @@ public class LandlordsJdbcRepository {
         String query = "SELECT * FROM landlords ";
         if (filter != null) {
             query += " WHERE 1=1 ";
-            if (filter.getName() != null) {
+            if (filter.getId() != null) {
                 query += " AND landlords.id = '" + filter.getId() + "'";
             }
             if (filter.getName() != null) {

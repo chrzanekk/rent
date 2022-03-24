@@ -38,24 +38,27 @@ public class ReservationsService {
             tenantId = tenantsService.create(new TenantData(data.getTenantName()));
         }
         BigDecimal rentalCost = calculateRenCost(data.getStartDate(), data.getEndDate(), rentObjectId);
-        return reservationsJdbcRepository.create(
+        reservationsJdbcRepository.create(
                 new ReservationsData(
                         data.getStartDate(),
                         data.getEndDate(),
                         tenantId,
                         rentObjectId,
                         rentalCost));
+        int size = find(new ReservationsFilter()).size();
+        Long lastId = find(new ReservationsFilter()).get(size-1).getId();
+        return lastId;
     }
 
-    public void update(ReservationsData data){
-        validateDates(data.getStartDate(),data.getEndDate(), data.getRentObjectId());
+    public void update(ReservationsData data) {
+        validateDates(data.getStartDate(), data.getEndDate(), data.getRentObjectId());
         validateEntryData(data);
         reservationsJdbcRepository.update(data);
     }
 
 
     public List<ReservationsData> find(ReservationsFilter filter) {
-        return getReservations(reservationsJdbcRepository.findReservationsByLandlordName(filter));
+        return getReservations(reservationsJdbcRepository.find(filter));
     }
 
     private List<ReservationsData> getReservations(List<Map<String, Object>> data) {
@@ -98,7 +101,8 @@ public class ReservationsService {
     }
 
     private BigDecimal calculatePricePerObjectPerDay(BigDecimal price, LocalDate date) {
-        BigDecimal result = (price.multiply(BigDecimal.valueOf(12))).divide(BigDecimal.valueOf(calculateDaysInYear(date)));
+        BigDecimal result =
+                price.multiply(BigDecimal.valueOf(12)).divide(BigDecimal.valueOf(calculateDaysInYear(date)), 2, RoundingMode.HALF_EVEN);
         return result;
     }
 
@@ -121,10 +125,10 @@ public class ReservationsService {
     private void validateDates(LocalDate startDate, LocalDate endDate, Long id) {
         List<ReservationsData> reservations = find(new ReservationsFilter(id));
         for (ReservationsData data : reservations) {
-            if (startDate.isBefore(data.getEndDate())) {
+            if (startDate.isBefore(data.getEndDate()) && startDate.isAfter(data.getStartDate())) {
                 throw new IllegalArgumentException("Data rozpoczęcia najmu niedostępna. Obiekt dostępny od " + data.getEndDate().plusDays(1));
             }
-            if (endDate.isAfter(data.getStartDate())) {
+            if (endDate.isAfter(data.getStartDate()) && endDate.isBefore(data.getEndDate())) {
                 throw new IllegalArgumentException("Data zakończenia najmu niedostępna. Obiekt dostępny jest do " + data.getStartDate().minusDays(1));
             }
         }

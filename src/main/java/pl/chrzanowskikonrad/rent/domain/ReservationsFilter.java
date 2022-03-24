@@ -2,11 +2,16 @@ package pl.chrzanowskikonrad.rent.domain;
 
 public class ReservationsFilter {
 
+    private Long id;
     private String landlordName;
-
     private Long rentObjectId;
 
     public ReservationsFilter() {
+    }
+
+    public ReservationsFilter(Long id, String landlordName) {
+        this.id = id;
+        this.landlordName = landlordName;
     }
 
     public ReservationsFilter(String landlordName) {

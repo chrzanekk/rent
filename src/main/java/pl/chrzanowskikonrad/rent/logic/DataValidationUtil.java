@@ -2,7 +2,6 @@ package pl.chrzanowskikonrad.rent.logic;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class DataValidationUtil {
 
@@ -48,7 +47,7 @@ public class DataValidationUtil {
     }
 
     public static boolean isUnitPricePositive(BigDecimal unitPrice) {
-        return unitPrice.compareTo(BigDecimal.ZERO) > 0;
+        return unitPrice.compareTo(BigDecimal.ZERO) < 0;
     }
 
     public static void validateDescription(String description, String fieldName) {

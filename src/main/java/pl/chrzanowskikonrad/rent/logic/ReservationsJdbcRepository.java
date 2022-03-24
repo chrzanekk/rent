@@ -19,7 +19,7 @@ public class ReservationsJdbcRepository {
         this.commonJdbcRepository = commonJdbcRepository;
     }
 
-    public Long create(ReservationsData data) {
+    public void create(ReservationsData data) {
         String query = "INSERT INTO reservations (" +
                 "rental_start," +
                 "rental_end," +
@@ -37,7 +37,6 @@ public class ReservationsJdbcRepository {
                 data.getTenantId(),
                 data.getRentObjectId(),
                 data.getRentalCost());
-        return commonJdbcRepository.getLastInsertedId();
     }
 
     public void update(ReservationsData data) {
@@ -59,7 +58,7 @@ public class ReservationsJdbcRepository {
                 data.getId());
     }
 
-    public List<Map<String, Object>> findReservationsByLandlordName(ReservationsFilter filter) {
+    public List<Map<String, Object>> find(ReservationsFilter filter) {
 
         String query = getMainFindQuery();
 
