@@ -1,6 +1,5 @@
 package pl.chrzanowskikonrad.rent.domain;
 
-import java.math.BigDecimal;
 
 public class RentObjectFilter {
     private Long id;
@@ -14,10 +13,6 @@ public class RentObjectFilter {
     }
 
     public RentObjectFilter() {
-    }
-
-    public RentObjectFilter(String name) {
-        this.name = name;
     }
 
     public RentObjectFilter(Long id) {

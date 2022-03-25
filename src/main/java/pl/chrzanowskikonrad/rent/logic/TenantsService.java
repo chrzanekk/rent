@@ -22,7 +22,9 @@ public class TenantsService {
 
     public Long create(TenantData data) {
         DataValidationUtil.validateTextField(data.getName(), "name");
-        return tenantsJdbcRepository.create(data);
+        tenantsJdbcRepository.create(data);
+        int size = find(new TenantFilter()).size();
+        return find(new TenantFilter()).get(size-1).getId();
     }
 
     public void update(TenantData data) {

@@ -19,9 +19,9 @@ public class RentObjectService {
         this.rentObjectJdbcRepository = rentObjectJdbcRepository;
     }
 
-    public Long create(RentObjectData data) {
+    public void create(RentObjectData data) {
         validateData(data);
-        return rentObjectJdbcRepository.create(data);
+        rentObjectJdbcRepository.create(data);
     }
 
     public void update(RentObjectData data) {

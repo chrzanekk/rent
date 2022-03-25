@@ -11,17 +11,14 @@ import java.util.Map;
 @Service
 public class LandlordsJdbcRepository {
     private JdbcTemplate jdbcTemplate;
-    private CommonJdbcRepository commonJdbcRepository;
 
-    public LandlordsJdbcRepository(JdbcTemplate jdbcTemplate, CommonJdbcRepository commonJdbcRepository) {
+    public LandlordsJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.commonJdbcRepository = commonJdbcRepository;
     }
 
-    public Long create(LandlordData data) {
+    public void create(LandlordData data) {
         String query = "INSERT INTO landlords (name) VALUES (?)";
         jdbcTemplate.update(query);
-        return commonJdbcRepository.getLastInsertedId();
     }
 
     public void update(LandlordData data) {

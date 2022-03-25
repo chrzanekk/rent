@@ -12,11 +12,9 @@ import java.util.Map;
 public class ReservationsJdbcRepository {
 
     private JdbcTemplate jdbcTemplate;
-    private CommonJdbcRepository commonJdbcRepository;
 
-    public ReservationsJdbcRepository(JdbcTemplate jdbcTemplate, CommonJdbcRepository commonJdbcRepository) {
+    public ReservationsJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.commonJdbcRepository = commonJdbcRepository;
     }
 
     public void create(ReservationsData data) {

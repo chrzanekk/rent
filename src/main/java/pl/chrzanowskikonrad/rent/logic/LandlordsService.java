@@ -20,9 +20,9 @@ public class LandlordsService {
         this.landlordsJdbcRepository = landlordsJdbcRepository;
     }
 
-    public Long create(LandlordData data) {
+    public void create(LandlordData data) {
         DataValidationUtil.validateTextField(data.getName(), "name");
-        return landlordsJdbcRepository.create(data);
+        landlordsJdbcRepository.create(data);
     }
 
     public void update(LandlordData data) {

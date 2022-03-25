@@ -9,15 +9,6 @@ public class ReservationsFilter {
     public ReservationsFilter() {
     }
 
-    public ReservationsFilter(Long id, String landlordName) {
-        this.id = id;
-        this.landlordName = landlordName;
-    }
-
-    public ReservationsFilter(String landlordName) {
-        this.landlordName = landlordName;
-    }
-
     public ReservationsFilter(Long rentObjectId) {
         this.rentObjectId = rentObjectId;
     }

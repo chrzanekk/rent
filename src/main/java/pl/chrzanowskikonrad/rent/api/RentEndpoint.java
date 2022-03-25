@@ -15,15 +15,9 @@ import java.util.List;
 public class RentEndpoint {
 
     private ReservationsService reservationsService;
-    private LandlordsService landlordsService;
-    private TenantsService tenantsService;
-    private RentObjectService rentObjectService;
 
-    public RentEndpoint(ReservationsService reservationsService, LandlordsService landlordsService, TenantsService tenantsService, RentObjectService rentObjectService) {
+    public RentEndpoint(ReservationsService reservationsService) {
         this.reservationsService = reservationsService;
-        this.landlordsService = landlordsService;
-        this.tenantsService = tenantsService;
-        this.rentObjectService = rentObjectService;
     }
 
     @GetMapping(path = "/reservations", produces = "application/json; charset=UTF-8")
@@ -56,25 +50,6 @@ public class RentEndpoint {
                 request.getRentObjectId()
         ));
     }
-
-
-//    mappings for tests only
-
-    @GetMapping(path = "/landlords", produces = "application/json; charset=UTF-8")
-    public List<LandlordData> getLandlords() {
-        return landlordsService.find(new LandlordFilter());
-    }
-
-    @GetMapping(path = "/tenants", produces = "application/json; charset=UTF-8")
-    public List<TenantData> getTenants() {
-        return tenantsService.find(new TenantFilter());
-    }
-
-    @GetMapping(path = "/rent-objects", produces = "application/json; charset=UTF-8")
-    public List<RentObjectData> getRentObjects() {
-        return rentObjectService.find(new RentObjectFilter());
-    }
-
 
     private List<ReservationGetResponse> reservationsToResponse(List<ReservationsData> reservations) {
         List<ReservationGetResponse> list = new ArrayList<>();
